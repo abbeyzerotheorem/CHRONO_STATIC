@@ -14,40 +14,39 @@ export default function HomePage() {
     <div>
       {/* ── Cinematic Hero ── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-black to-black" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(56,189,248,0.08),transparent_60%)]" />
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-sky-500/5 blur-3xl rounded-full" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] md:w-[800px] h-[300px] md:h-[400px] bg-sky-500/5 blur-3xl rounded-full" />
 
-        <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+        <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 md:pt-20">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-6"
           >
-            <span className="inline-block text-[10px] font-mono font-bold tracking-[0.3em] text-sky-400 uppercase bg-sky-500/10 border border-sky-500/20 px-4 py-2 rounded-full">
+            <span className="inline-block text-[9px] md:text-[10px] font-mono font-bold tracking-[0.3em] text-sky-400 uppercase bg-sky-500/10 border border-sky-500/20 px-3 md:px-4 py-1.5 md:py-2 rounded-full">
               Winter 2026 Collection
             </span>
 
-            <h1 className="text-display-xl text-white max-w-4xl mx-auto">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[7.5rem] font-display font-bold leading-none tracking-tight text-white max-w-4xl mx-auto px-2">
               Engineered for the{' '}
               <span className="text-gradient-blue">Extreme</span>
             </h1>
 
-            <p className="text-body text-slate-400 max-w-xl mx-auto">
+            <p className="text-sm md:text-body text-slate-400 max-w-xl mx-auto px-4">
               Premium technical fashion built for the most punishing environments on Earth. 
               Where alpine performance meets cybernetic precision.
             </p>
 
-            <div className="flex items-center justify-center gap-4 pt-4">
-              <Link to="/shop">
-                <Button variant="primary" size="xl" icon={<ArrowRight className="w-5 h-5" />} iconPosition="right">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 pt-4 px-4">
+              <Link to="/shop" className="w-full sm:w-auto">
+                <Button variant="primary" size="lg" className="w-full sm:w-auto" icon={<ArrowRight className="w-5 h-5" />} iconPosition="right">
                   Explore Collection
                 </Button>
               </Link>
-              <Link to="/about">
-                <Button variant="outline" size="xl">
+              <Link to="/about" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   Our Story
                 </Button>
               </Link>
@@ -59,7 +58,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto"
+            className="mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-3xl mx-auto px-4"
           >
             {[
               { value: '-40°C', label: 'Rated Temperature' },
@@ -67,39 +66,38 @@ export default function HomePage() {
               { value: '900 FP', label: 'Down Fill Power' },
               { value: '5 Yr', label: 'Warranty' },
             ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-2xl font-display font-bold text-white">{stat.value}</p>
-                <p className="text-xs font-mono text-slate-500 mt-1">{stat.label}</p>
+              <div key={stat.label} className="text-center p-3 md:p-0">
+                <p className="text-xl md:text-2xl font-display font-bold text-white">{stat.value}</p>
+                <p className="text-[10px] md:text-xs font-mono text-slate-500 mt-1">{stat.label}</p>
               </div>
             ))}
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2"
         >
-          <div className="w-6 h-10 rounded-full border border-slate-700 flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-sky-500 rounded-full" />
+          <div className="w-5 h-8 md:w-6 md:h-10 rounded-full border border-slate-700 flex items-start justify-center p-1.5 md:p-2">
+            <div className="w-0.5 md:w-1 h-1.5 md:h-2 bg-sky-500 rounded-full" />
           </div>
         </motion.div>
       </section>
 
       {/* ── Featured Products ── */}
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
+            className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-4 md:gap-6"
           >
             <div className="space-y-2">
               <span className="text-mono-xs text-sky-400 font-bold">// FEATURED</span>
-              <h2 className="text-display text-white">New Essentials</h2>
+              <h2 className="text-3xl md:text-display text-white">New Essentials</h2>
             </div>
             <Link
               to="/shop"
@@ -114,7 +112,7 @@ export default function HomePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
           >
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
@@ -124,23 +122,23 @@ export default function HomePage() {
       </section>
 
       {/* ── Collections ── */}
-      <section className="py-24 bg-white/[0.02] border-y border-white/5">
+      <section className="py-16 md:py-24 bg-white/[0.02] border-y border-white/5">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-10 md:mb-16"
           >
             <span className="text-mono-xs text-sky-400 font-bold">// COLLECTIONS</span>
-            <h2 className="text-display text-white mt-2">Curated for the Cold</h2>
-            <p className="text-body-sm text-slate-400 mt-4 max-w-lg mx-auto">
+            <h2 className="text-3xl md:text-display text-white mt-2">Curated for the Cold</h2>
+            <p className="text-body-sm text-slate-400 mt-4 max-w-lg mx-auto px-4">
               Each collection is engineered for specific environments and missions.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {featuredCollections.map((collection, index) => (
               <motion.div
                 key={collection.id}
@@ -148,7 +146,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 viewport={{ once: true }}
-                className="group relative h-[500px] rounded-2xl overflow-hidden border border-white/5 cursor-pointer"
+                className="group relative h-[350px] md:h-[500px] rounded-2xl overflow-hidden border border-white/5 cursor-pointer"
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
                 <img
@@ -156,10 +154,10 @@ export default function HomePage() {
                   alt={collection.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
-                  <p className="text-[10px] font-mono font-bold tracking-[0.2em] text-sky-400 uppercase">{collection.season}</p>
-                  <h3 className="text-2xl font-display font-bold text-white mt-1">{collection.name}</h3>
-                  <p className="text-sm text-slate-400 mt-2 max-w-xs">{collection.description}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-20">
+                  <p className="text-[9px] md:text-[10px] font-mono font-bold tracking-[0.2em] text-sky-400 uppercase">{collection.season}</p>
+                  <h3 className="text-xl md:text-2xl font-display font-bold text-white mt-1">{collection.name}</h3>
+                  <p className="text-xs md:text-sm text-slate-400 mt-2 max-w-xs line-clamp-2">{collection.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -168,20 +166,20 @@ export default function HomePage() {
       </section>
 
       {/* ── Technology ── */}
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-10 md:mb-16"
           >
             <span className="text-mono-xs text-sky-400 font-bold">// TECHNOLOGY</span>
-            <h2 className="text-display text-white mt-2">Built Different</h2>
+            <h2 className="text-3xl md:text-display text-white mt-2">Built Different</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {[
               { icon: Thermometer, title: 'Graphene Core', desc: 'Active thermal regulation down to -40°C' },
               { icon: Shield, title: 'DWR Shield', desc: '20,000mm waterproof rating with sealed seams' },
@@ -194,13 +192,13 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="p-6 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors"
+                className="p-5 md:p-6 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors"
               >
-                <div className="w-12 h-12 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center mb-4">
-                  <tech.icon className="w-6 h-6 text-sky-400" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center mb-3 md:mb-4">
+                  <tech.icon className="w-5 h-5 md:w-6 md:h-6 text-sky-400" />
                 </div>
-                <h3 className="text-lg font-display font-bold text-white">{tech.title}</h3>
-                <p className="text-sm text-slate-400 mt-1">{tech.desc}</p>
+                <h3 className="text-base md:text-lg font-display font-bold text-white">{tech.title}</h3>
+                <p className="text-xs md:text-sm text-slate-400 mt-1">{tech.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -208,7 +206,7 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-32 bg-white/[0.02] border-y border-white/5">
+      <section className="py-20 md:py-32 bg-white/[0.02] border-y border-white/5">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -217,19 +215,19 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-mono-xs text-sky-400 font-bold">// JOIN THE FLEET</span>
-            <h2 className="text-display-lg text-white mt-4 max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-display-lg text-white mt-4 max-w-3xl mx-auto px-4">
               Ready for the <span className="text-gradient-blue">Extreme</span>?
             </h2>
-            <p className="text-body text-slate-400 mt-4 max-w-lg mx-auto">
+            <p className="text-body-sm md:text-body text-slate-400 mt-4 max-w-lg mx-auto px-4">
               Sign up for early access to new drops, field test reports, and exclusive gear.
             </p>
-            <div className="mt-8 flex items-center justify-center gap-3 max-w-md mx-auto">
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto px-4">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 bg-black/40 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 font-body focus:outline-none focus:border-sky-500/50"
+                className="w-full sm:flex-1 bg-black/40 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 font-body focus:outline-none focus:border-sky-500/50"
               />
-              <Button variant="primary" size="md">
+              <Button variant="primary" size="md" className="w-full sm:w-auto">
                 Subscribe
               </Button>
             </div>

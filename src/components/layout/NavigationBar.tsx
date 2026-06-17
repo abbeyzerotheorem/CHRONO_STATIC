@@ -16,15 +16,7 @@ export function NavigationBar() {
   const isMobile = useIsMobile();
   const megaMenuTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const {
-    isDarkMode,
-    toggleDarkMode,
-    openCart,
-    openWishlist,
-    openSearch,
-    toggleMobileMenu,
-    isMobileMenuOpen,
-  } = useUIStore();
+  const { openCart, openWishlist, openSearch, toggleMobileMenu, isMobileMenuOpen } = useUIStore();
 
   const cartCount = useCartStore((s) => s.items.reduce((acc, item) => acc + item.quantity, 0));
   const wishlistCount = useWishlistStore((s) => s.items.length);
@@ -48,6 +40,11 @@ export function NavigationBar() {
     megaMenuTimeout.current = setTimeout(() => setActiveMegaMenu(null), 150);
   };
 
+  const isRouteActive = (href: string): boolean => {
+    if (href === '/') return location.pathname === '/';
+    return location.pathname === href || location.pathname.startsWith(href + '/');
+  };
+
   return (
     <header
       className={cn(
@@ -58,17 +55,17 @@ export function NavigationBar() {
       )}
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-1.5 group"
+            className="flex items-center gap-1.5 group flex-shrink-0"
             aria-label="CHRONO STATIC Home"
           >
-            <span className="font-display text-2xl font-bold tracking-tight text-white">
+            <span className="font-display text-xl md:text-2xl font-bold tracking-tight text-white">
               CHRONO
             </span>
-            <span className="relative inline-block -rotate-6 bg-sky-500 text-black px-2 py-0.5 text-[10px] font-mono font-black rounded group-hover:rotate-0 transition-all duration-300">
+            <span className="relative inline-block -rotate-6 bg-sky-500 text-black px-1.5 md:px-2 py-0.5 text-[9px] md:text-[10px] font-mono font-black rounded group-hover:rotate-0 transition-all duration-300">
               STATIC
             </span>
           </Link>
@@ -76,7 +73,8 @@ export function NavigationBar() {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1" onMouseLeave={handleMegaMenuLeave}>
             {NAVIGATION.main.map((item) => {
-              const isActive = location.pathname === item.href || location.pathname.startsWith(item.href + '/');
+              const isActive = isRouteActive(item.href);
+              const isMegaOpen = activeMegaMenu === item.label;
               const hasColumns = 'columns' in item;
 
               return (
@@ -88,15 +86,24 @@ export function NavigationBar() {
                   <Link
                     to={item.href}
                     className={cn(
-                      'px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase transition-all rounded-lg',
-                      isActive || activeMegaMenu === item.label
-                        ? 'text-sky-400 bg-sky-500/10'
-                        : 'text-slate-400 hover:text-white hover:bg-white/5'
+                      'relative px-3 xl:px-4 py-2 text-[11px] xl:text-xs font-mono font-bold tracking-widest uppercase transition-colors rounded-lg',
+                      isActive || isMegaOpen
+                        ? 'text-sky-400'
+                        : 'text-slate-400 hover:text-white'
                     )}
                   >
-                    <span className="flex items-center gap-1">
+                    {/* Active indicator bar */}
+                    {(isActive || isMegaOpen) && (
+                      <motion.div
+                        layoutId="nav-active"
+                        className="absolute inset-0 bg-sky-500/10 rounded-lg"
+                        initial={false}
+                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10 flex items-center gap-1">
                       {item.label}
-                      {hasColumns && <ChevronDown className="w-3 h-3" />}
+                      {hasColumns && <ChevronDown className={cn('w-3 h-3 transition-transform duration-200', isMegaOpen && 'rotate-180')} />}
                     </span>
                   </Link>
                 </div>
@@ -105,55 +112,55 @@ export function NavigationBar() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5 md:gap-1">
             <button
               onClick={openSearch}
-              className="p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+              className="p-2 md:p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
               aria-label="Search products"
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-4 h-4 md:w-5 md:h-5" />
             </button>
 
             <Link
               to="/wishlist"
-              className="relative p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+              className="relative p-2 md:p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
               aria-label="Wishlist"
             >
-              <Heart className="w-5 h-5" />
+              <Heart className="w-4 h-4 md:w-5 md:h-5" />
               {wishlistCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-sky-500 text-black text-[9px] font-mono font-black rounded-full flex items-center justify-center">
-                  {wishlistCount}
+                <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 md:w-4 md:h-4 bg-sky-500 text-black text-[8px] md:text-[9px] font-mono font-black rounded-full flex items-center justify-center">
+                  {wishlistCount > 9 ? '9+' : wishlistCount}
                 </span>
               )}
             </Link>
 
             <button
               onClick={openCart}
-              className="relative p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+              className="relative p-2 md:p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
               aria-label="Shopping cart"
             >
-              <ShoppingBag className="w-5 h-5" />
+              <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
               {cartCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-sky-500 text-black text-[9px] font-mono font-black rounded-full flex items-center justify-center">
-                  {cartCount}
+                <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 md:w-4 md:h-4 bg-sky-500 text-black text-[8px] md:text-[9px] font-mono font-black rounded-full flex items-center justify-center">
+                  {cartCount > 9 ? '9+' : cartCount}
                 </span>
               )}
             </button>
 
             <Link
               to="/login"
-              className="hidden sm:flex p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+              className="hidden sm:flex p-2 md:p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
               aria-label="Account"
             >
-              <User className="w-5 h-5" />
+              <User className="w-4 h-4 md:w-5 md:h-5" />
             </Link>
 
             <button
               onClick={toggleMobileMenu}
-              className="lg:hidden p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+              className="lg:hidden p-2 md:p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileMenuOpen ? <X className="w-4 h-4 md:w-5 md:h-5" /> : <Menu className="w-4 h-4 md:w-5 md:h-5" />}
             </button>
           </div>
         </div>
@@ -163,31 +170,31 @@ export function NavigationBar() {
       <AnimatePresence>
         {activeMegaMenu && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl border-b border-white/5 shadow-2xl"
             onMouseEnter={() => handleMegaMenuEnter(activeMegaMenu)}
             onMouseLeave={handleMegaMenuLeave}
           >
-            <div className="max-w-[1440px] mx-auto px-8 py-10">
-              <div className="grid grid-cols-4 gap-10">
+            <div className="max-w-[1440px] mx-auto px-6 md:px-8 py-8 md:py-10">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
                 {NAVIGATION.main
                   .filter((item) => item.label === activeMegaMenu && 'columns' in item)
                   .flatMap((item) =>
                     'columns' in item
                       ? item.columns.map((col) => (
                           <div key={col.title}>
-                            <h3 className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-sky-400 mb-4">
+                            <h3 className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-sky-400 mb-3 md:mb-4">
                               {col.title}
                             </h3>
-                            <ul className="space-y-2.5">
+                            <ul className="space-y-2">
                               {col.links.map((link) => (
                                 <li key={link.label}>
                                   <Link
                                     to={link.href}
-                                    className="text-sm text-slate-400 hover:text-white transition-colors font-body"
+                                    className="text-sm text-slate-400 hover:text-white transition-colors font-body block py-1"
                                   >
                                     {link.label}
                                   </Link>
