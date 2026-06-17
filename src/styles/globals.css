@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Font Families */
+  --font-display: "Instrument Sans", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-alt: "Space Grotesk", sans-serif;
+
+  /* Brand Colors */
+  --color-white: #FFFFFF;
+  --color-off-white: #F5F5F0;
+  --color-ice-blue: #E0F0FF;
+  --color-electric-blue: #00B4FF;
+  --color-sky: #38BDF8;
+  --color-dark-navy: #0F172A;
+  --color-charcoal: #1E293B;
+  --color-slate-700: #334155;
+  --color-slate-400: #94A3B8;
+  --color-silver: #CBD5E1;
+  --color-black: #0A0A0A;
+  --color-almost-black: #111111;
+
+  /* Custom Easing */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* ── Base Styles ── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    @apply border-slate-800/20;
+  }
+
+  /* Focus styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-sky-500/50 ring-offset-2 ring-offset-transparent;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-sky-500/20 text-sky-400;
+  }
+}
+
+/* ── Typography ── */
+@layer components {
+  .text-display-xl {
+    @apply font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[7.5rem] font-bold leading-none tracking-tight;
+  }
+
+  .text-display-lg {
+    @apply font-display text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold leading-none tracking-tight;
+  }
+
+  .text-display {
+    @apply font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-tight tracking-tight;
+  }
+
+  .text-h1 {
+    @apply font-display text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold leading-tight tracking-tight;
+  }
+
+  .text-h2 {
+    @apply font-display text-xl sm:text-2xl md:text-3xl font-bold leading-snug tracking-tight;
+  }
+
+  .text-h3 {
+    @apply font-display text-lg sm:text-xl md:text-2xl font-semibold leading-snug;
+  }
+
+  .text-h4 {
+    @apply font-display text-base sm:text-lg md:text-xl font-semibold leading-snug;
+  }
+
+  .text-body-lg {
+    @apply font-body text-lg leading-relaxed;
+  }
+
+  .text-body {
+    @apply font-body text-base leading-relaxed;
+  }
+
+  .text-body-sm {
+    @apply font-body text-sm leading-relaxed;
+  }
+
+  .text-caption {
+    @apply font-body text-xs leading-normal;
+  }
+
+  .text-mono-xs {
+    @apply font-mono text-[0.625rem] leading-normal tracking-widest;
+  }
+
+  .text-mono-sm {
+    @apply font-mono text-xs leading-normal tracking-wider;
+  }
+
+  .text-mono {
+    @apply font-mono text-sm leading-normal;
+  }
+}
+
+/* ── Animations ── */
+@layer utilities {
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  .text-gradient-blue {
+    background: linear-gradient(135deg, #00B4FF, #38BDF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-white {
+    background: linear-gradient(135deg, #FFFFFF, #94A3B8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-xl border border-white/5;
+  }
+
+  .glass-blue {
+    @apply bg-sky-500/5 backdrop-blur-xl border border-sky-500/10;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+/* ── Smooth Scroll (Lenis) ── */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "CHRONO STATIC Technical Outerwear",
+  "description": "A premium cyber-winter technical fashion storefront featuring advanced outerwear, interactive dark mode, and a complete checkout system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
