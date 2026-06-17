@@ -71,7 +71,7 @@ export function NavigationBar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1" onMouseLeave={handleMegaMenuLeave}>
+          <nav className="hidden lg:flex items-center gap-2 xl:gap-3" onMouseLeave={handleMegaMenuLeave}>
             {NAVIGATION.main.map((item) => {
               const isActive = isRouteActive(item.href);
               const isMegaOpen = activeMegaMenu === item.label;
@@ -86,7 +86,7 @@ export function NavigationBar() {
                   <Link
                     to={item.href}
                     className={cn(
-                      'relative px-3 xl:px-4 py-2 text-[11px] xl:text-xs font-mono font-bold tracking-widest uppercase transition-colors rounded-lg',
+                      'relative px-4 xl:px-5 py-2.5 text-xs font-mono font-bold tracking-widest uppercase transition-colors rounded-lg',
                       isActive || isMegaOpen
                         ? 'text-sky-400'
                         : 'text-slate-400 hover:text-white'
@@ -112,7 +112,7 @@ export function NavigationBar() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-0.5 md:gap-1">
+            <div className="flex items-center gap-1 md:gap-2">
             <button
               onClick={openSearch}
               className="p-2 md:p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
