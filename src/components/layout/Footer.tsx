@@ -70,16 +70,16 @@ export function Footer() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <a href={`https://instagram.com/${SITE.social.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="Instagram">
+              <a href={`#`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="Instagram">
                 <Instagram className="w-4 h-4" />
               </a>
-              <a href={`https://twitter.com/${SITE.social.twitter.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="Twitter">
+              <a href={`#`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="Twitter">
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href={`https://youtube.com/${SITE.social.youtube.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="YouTube">
+              <a href={`#`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="YouTube">
                 <Youtube className="w-4 h-4" />
               </a>
-              <a href={`https://tiktok.com/${SITE.social.tiktok.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="TikTok">
+              <a href={`#`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="TikTok">
                 <Music2 className="w-4 h-4" />
               </a>
             </div>
