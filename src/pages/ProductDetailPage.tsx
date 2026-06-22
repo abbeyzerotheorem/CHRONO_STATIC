@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Lottie from 'lottie-react';
 import { ChevronLeft, ChevronRight, Thermometer, Wind, Shield, Eye, Maximize2, Heart, ShoppingCart, Star, Clock, Ruler, Droplets, Snowflake } from 'lucide-react';
 import { PRODUCTS } from '../constants/products';
+import notFoundAnimationRaw from '../../public/page-not-found.json?raw';
 import { PageTransition } from '../components/layout/PageTransition';
 import { Breadcrumb } from '../components/ui/Breadcrumb';
 import { Button } from '../components/ui/Button';
@@ -39,7 +41,19 @@ export default function ProductDetailPage() {
     return (
       <PageTransition>
         <div className="pt-24 pb-16 min-h-screen flex items-center justify-center">
-          <div className="text-center">
+          <div className="text-center px-4 max-w-lg mx-auto">
+            {/* Lottie Animation */}
+            <div className="w-64 h-64 mx-auto mb-6">
+              <Lottie
+                animationData={JSON.parse(notFoundAnimationRaw)}
+                loop
+                autoplay
+                rendererSettings={{
+                  preserveAspectRatio: 'xMidYMid slice',
+                }}
+              />
+            </div>
+
             <h1 className="text-2xl font-display font-bold text-white">Product Not Found</h1>
             <p className="text-slate-400 mt-2 mb-6">This tactical asset is not in our database.</p>
             <Link to="/shop">
