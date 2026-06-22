@@ -5,6 +5,7 @@ export interface Product {
   price: number;
   originalPrice?: number;
   image: string;
+  colorImages?: Record<string, string>;
   gallery?: string[];
   category: 'puffers' | 'boots' | 'gear' | 'accessories';
   colors: string[];

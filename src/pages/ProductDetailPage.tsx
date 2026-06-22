@@ -51,7 +51,17 @@ export default function ProductDetailPage() {
     );
   }
 
-  const images = product.gallery?.length ? product.gallery : [product.image];
+  // Resolve images based on selected colorway
+  const getActiveImages = () => {
+    const colorImg = product.colorImages?.[selectedColor];
+    if (colorImg && product.gallery) {
+      // If we have a color-specific image, use it as primary
+      const rest = product.gallery.filter((img) => img !== colorImg);
+      return [colorImg, ...rest];
+    }
+    return product.gallery?.length ? product.gallery : [product.image];
+  };
+  const images = getActiveImages();
   const wishlisted = isInWishlist(product.id);
 
   const colorMap: Record<string, string> = {
