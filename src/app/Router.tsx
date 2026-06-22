@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { AppLayout } from './AppLayout';
 import { LoadingSpinner } from '../components/ui/LoadingSpinner';
+import { ErrorBoundary } from '../components/ErrorBoundary';
 import { LegalPage, privacySections, termsSections, shippingSections, returnsSections } from '../pages/LegalPage';
 
 const LazyLoad = ({ Component }: { Component: React.ComponentType }) => (
@@ -40,6 +41,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <AppLayout />,
+    errorElement: <ErrorBoundary />,
     children: [
       { index: true, element: <LazyLoad Component={HomePage} /> },
 

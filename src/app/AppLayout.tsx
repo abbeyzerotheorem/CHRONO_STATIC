@@ -9,6 +9,8 @@ import { SearchOverlay } from '../components/layout/SearchOverlay';
 import { CartDrawer } from '../components/layout/CartDrawer';
 import { ScrollProgressBar } from '../components/layout/ScrollProgressBar';
 import { CursorEffect } from '../components/layout/CursorEffect';
+import { SizeGuideModal } from '../components/ui/SizeGuideModal';
+import { BackToTop } from '../components/ui/BackToTop';
 
 export function AppLayout() {
   const location = useLocation();
@@ -45,6 +47,8 @@ export function AppLayout() {
       <MobileMenu />
       <SearchOverlay />
       <CartDrawer />
+      <SizeGuideModal />
+      <BackToTop />
 
       <main className="min-h-screen">
         <AnimatePresence mode="wait">

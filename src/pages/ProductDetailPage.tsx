@@ -14,6 +14,7 @@ import { Rating } from '../components/ui/Rating';
 import { Price } from '../components/ui/Price';
 import { useCartStore } from '../store/cartStore';
 import { useWishlistStore } from '../store/wishlistStore';
+import { useUIStore } from '../store/uiStore';
 import { cn } from '../lib/utils';
 
 const weatherIcons: Record<string, React.ReactNode> = {
@@ -30,6 +31,7 @@ export default function ProductDetailPage() {
   const product = PRODUCTS.find((p) => p.slug === slug);
   const { addItem } = useCartStore();
   const { toggleItem, isInWishlist } = useWishlistStore();
+  const { openSizeGuide } = useUIStore();
   const [selectedSize, setSelectedSize] = useState(product?.sizes[0] || '');
   const [selectedColor, setSelectedColor] = useState(product?.colors[0] || '');
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -111,11 +113,14 @@ export default function ProductDetailPage() {
                 onMouseEnter={() => setShowZoom(true)}
                 onMouseLeave={() => setShowZoom(false)}
               >
-                <img
-                  src={images[activeImageIndex]}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
+                <div className="relative w-full h-full">
+                  <img
+                    src={images[activeImageIndex]}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-700"
+                    style={{ transform: showZoom ? 'scale(1.5)' : 'scale(1)' }}
+                  />
+                </div>
 
                 {/* Cinematic overlay gradients */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
@@ -325,7 +330,10 @@ export default function ProductDetailPage() {
                     <span className="text-mono-sm text-sky-400 font-bold uppercase tracking-wider">
                       // Select Size
                     </span>
-                    <button className="text-[10px] font-mono text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-1">
+                    <button
+                      onClick={openSizeGuide}
+                      className="text-[10px] font-mono text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-1"
+                    >
                       <Ruler className="w-3 h-3" /> Size Guide
                     </button>
                   </div>

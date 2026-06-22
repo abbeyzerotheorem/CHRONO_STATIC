@@ -7,6 +7,7 @@ interface UIState {
   isSearchOpen: boolean;
   isMobileMenuOpen: boolean;
   isMegaMenuOpen: boolean;
+  isSizeGuideOpen: boolean;
   activeMegaMenu: string | null;
 
   toggleDarkMode: () => void;
@@ -25,6 +26,9 @@ interface UIState {
   openMegaMenu: (label: string) => void;
   closeMegaMenu: () => void;
   toggleMegaMenu: (label: string) => void;
+  openSizeGuide: () => void;
+  closeSizeGuide: () => void;
+  toggleSizeGuide: () => void;
 }
 
 export const useUIStore = create<UIState>((set, get) => ({
@@ -34,6 +38,7 @@ export const useUIStore = create<UIState>((set, get) => ({
   isSearchOpen: false,
   isMobileMenuOpen: false,
   isMegaMenuOpen: false,
+  isSizeGuideOpen: false,
   activeMegaMenu: null,
 
   toggleDarkMode: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
@@ -61,4 +66,8 @@ export const useUIStore = create<UIState>((set, get) => ({
       isMegaMenuOpen: state.activeMegaMenu === label ? false : true,
       activeMegaMenu: state.activeMegaMenu === label ? null : label,
     })),
+
+  openSizeGuide: () => set({ isSizeGuideOpen: true }),
+  closeSizeGuide: () => set({ isSizeGuideOpen: false }),
+  toggleSizeGuide: () => set((state) => ({ isSizeGuideOpen: !state.isSizeGuideOpen })),
 }));

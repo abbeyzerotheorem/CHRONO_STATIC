@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { ShieldCheck, ArrowUpRight } from 'lucide-react';
-import { SITE, NAVIGATION } from '@/src/constants/site';
+import { ShieldCheck, ArrowUpRight, Instagram, Twitter, Youtube, Music2, CreditCard, Wallet } from 'lucide-react';
+import { SITE, NAVIGATION } from '../../constants/site';
 
 export function Footer() {
   return (
@@ -60,12 +60,36 @@ export function Footer() {
               SECURE CONNECTION
             </span>
           </div>
-          <div className="flex items-center gap-3 text-[10px] font-mono text-slate-600">
-            <span>ID: 7CEBB11D</span>
-            <div className="flex gap-0.5 h-5 items-end bg-white/10 px-2 py-0.5 rounded">
-              {[1, 2, 1, 3, 1, 1, 2, 3, 1, 2].map((w, i) => (
-                <div key={i} className="w-[1px] bg-slate-400" style={{ height: `${w * 25 + 25}%` }} />
-              ))}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3 text-[10px] font-mono text-slate-600">
+              <span>ID: 7CEBB11D</span>
+              <div className="flex gap-0.5 h-5 items-end bg-white/10 px-2 py-0.5 rounded">
+                {[1, 2, 1, 3, 1, 1, 2, 3, 1, 2].map((w, i) => (
+                  <div key={i} className="w-[1px] bg-slate-400" style={{ height: `${w * 25 + 25}%` }} />
+                ))}
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <a href={`https://instagram.com/${SITE.social.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="Instagram">
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a href={`https://twitter.com/${SITE.social.twitter.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="Twitter">
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a href={`https://youtube.com/${SITE.social.youtube.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="YouTube">
+                <Youtube className="w-4 h-4" />
+              </a>
+              <a href={`https://tiktok.com/${SITE.social.tiktok.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-400 transition-colors" aria-label="TikTok">
+                <Music2 className="w-4 h-4" />
+              </a>
+            </div>
+            <div className="flex items-center gap-3 text-slate-600">
+              <CreditCard className="w-5 h-5" />
+              <Wallet className="w-5 h-5" />
+              <div className="flex items-center gap-1 text-[10px] font-mono">
+                <span className="px-1.5 py-0.5 border border-slate-700 rounded text-slate-500">VISA</span>
+                <span className="px-1.5 py-0.5 border border-slate-700 rounded text-slate-500">MC</span>
+              </div>
             </div>
           </div>
         </div>

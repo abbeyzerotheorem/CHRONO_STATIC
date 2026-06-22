@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Shield, Thermometer, Wind, Zap } from 'lucide-react';
+import { ArrowRight, Shield, Thermometer, Wind, Zap, Check } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../lib/animations';
 import { Button } from '../components/ui/Button';
 import { ProductCard } from '../components/shop/ProductCard';
 import { PRODUCTS, COLLECTIONS } from '../constants/products';
 
 export default function HomePage() {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
   const featuredProducts = PRODUCTS.filter((p) => p.featured).slice(0, 3);
   const featuredCollections = COLLECTIONS.filter((c) => c.featured).slice(0, 3);
 
@@ -222,14 +225,35 @@ export default function HomePage() {
               Sign up for early access to new drops, field test reports, and exclusive gear.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto px-4">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full sm:flex-1 bg-black/40 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 font-body focus:outline-none focus:border-sky-500/50"
-              />
-              <Button variant="primary" size="md" className="w-full sm:w-auto">
-                Subscribe
-              </Button>
+              {subscribed ? (
+                <div className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                  <Check className="w-5 h-5" />
+                  <span className="text-sm font-medium">You're on the list!</span>
+                </div>
+              ) : (
+                <>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="w-full sm:flex-1 bg-black/40 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 font-body focus:outline-none focus:border-sky-500/50"
+                  />
+                  <Button
+                    variant="primary"
+                    size="md"
+                    className="w-full sm:w-auto"
+                    onClick={() => {
+                      if (email && email.includes('@')) {
+                        setSubscribed(true);
+                        setEmail('');
+                      }
+                    }}
+                  >
+                    Subscribe
+                  </Button>
+                </>
+              )}
             </div>
           </motion.div>
         </div>
